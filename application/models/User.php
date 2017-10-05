@@ -8,32 +8,33 @@
 		}
 		function GetLogin()
 		{
-			$value = $this->db->query('SELECT * FROM  `login` WHERE 1')->result();
+			$value = $this->db->query('SELECT * FROM  `pegawai` WHERE 1')->result();
 			return $value;
 		}
+		
 		function LastVisit($data, $id)
 		{
 			$this->db->where('id_login', $id);
-			$this->db->update('login', $data);
+			$this->db->update('pegawai', $data);
 		}
 		function GetloginById($id)
 		{
-			$value = $this->db->query("SELECT * FROM  `login` WHERE id_login='$id'")->result();
+			$value = $this->db->query("SELECT * FROM  `pegawai` WHERE id_login='$id'")->result();
 			return $value;
 		}
 		function Updatelogin($data, $id)
 		{
 			$this->db->where('id_login', $id);
-			$this->db->update('login', $data);
+			$this->db->update('pegawai', $data);
 		}
 		function hapuslogin($id)
 		{
 			$this->db->where('id_login',$id);
-			$this->db->delete('login');
+			$this->db->delete('pegawai');
 		}
 		function insertlogin($data)
 		{
-			return $this->db->insert("login",$data);
+			return $this->db->insert("pegawai",$data);
 		}
 	}
 ?>

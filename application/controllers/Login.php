@@ -8,6 +8,7 @@ class Login extends CI_Controller {
 		parent::__construct();
 		$this->load->library('session');
 		$this->load->model('User');
+		$this->load->model('Form_model');
 	}
 	public function index()
 	{
@@ -34,9 +35,8 @@ class Login extends CI_Controller {
 					if($password == $key->password)
 					{
 						$this->session->set_userdata('id_login',$key->id_login);
-						$this->session->set_userdata('id_role',$key->id_role);
 						$this->session->set_userdata('lastvisit_at',$key->lastvisit_at);
-						$flag=$key->id_role;
+						$flag=2;
 						break;
 					}
 				}
@@ -53,7 +53,7 @@ class Login extends CI_Controller {
 				//user
 				$data = array('lastvisit_at' => date('Y-m-d H:i:s'));
 				$this->User->LastVisit($data,$this->session->userdata('id_login'));
-				$this->load->view('user/dashboard');
+				$this->user_dashboard();
 			}
 			else
 			{
@@ -70,5 +70,13 @@ class Login extends CI_Controller {
 		$kirim["error"] = "";
 		$this->session->sess_destroy();
 		$this->load->view("login", $kirim);
+	}
+
+	public function user_dashboard()
+	{
+		$kirim['jenis_barang'] = $this->Form_model->get_jenis_barang();
+		$kirim['location'] = $this->Form_model->get_location();
+		$kirim['selected_kode_baru'] = 1;
+		$this->load->view('user/dashboard', $kirim);
 	}
 }

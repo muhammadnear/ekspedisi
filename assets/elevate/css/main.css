@@ -579,14 +579,17 @@ input[type="password"],
 textarea,
 select {
 	display: block;
-	height: 6rem;
-	padding: 1.5rem 2.5rem;
+	/*height: 6rem;
+	padding: 1.5rem 2.5rem;*/
+	padding-left: 1.5rem;
+    padding-top: .5rem;
+    padding-bottom: 0.5rem;
 	border: 0;
 	outline: none;
 	vertical-align: middle;
 	color: rgba(0, 0, 0, 0.7);
 	font-family: "roboto-regular", sans-serif;
-	font-size: 1.5rem;
+	font-size: 1rem;
 	line-height: 3rem;
 	max-width: 100%;
 	background: rgba(0, 0, 0, 0.2);
