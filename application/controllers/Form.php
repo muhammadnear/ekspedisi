@@ -100,25 +100,30 @@ class Form extends CI_Controller {
 
 		$flag = 0;
 		$kirim['submitted'] = "";
+		if(!empty($result['kode']))
+		{
+			$flag = 1;
+			$kirim['submitted'] = $kirim['submitted']."Kami menemukan ".sizeof($result['kode'])." kode barang yang sesuai dengan kata kunci anda.<br>";
+		}
 		if(!empty($result['nama']))
 		{
 			$flag = 1;
-			$kirim['submitted'] += "Kami menemukan ".sizeof($result['nama'])." nama barang yang sesuai dengan kata kunci anda.<br>";
+			$kirim['submitted'] = $kirim['submitted']."Kami menemukan ".sizeof($result['nama'])." nama barang yang sesuai dengan kata kunci anda.<br>";
 		}
 		if(!empty($result['serial']))
 		{
 			$flag = 1;
-			$kirim['submitted'] += "Kami menemukan ".sizeof($result['serial'])." nama barang yang sesuai dengan kata kunci anda.<br>";
+			$kirim['submitted'] = $kirim['submitted']."Kami menemukan ".sizeof($result['serial'])." serial barang yang sesuai dengan kata kunci anda.<br>";
 		}
 		if(!empty($result['brand']))
 		{
 			$flag = 1;
-			$kirim['submitted'] += "Kami menemukan ".sizeof($result['brand'])." nama barang yang sesuai dengan kata kunci anda.<br>";
+			$kirim['submitted'] = $kirim['submitted']."Kami menemukan ".sizeof($result['brand'])." brand barang yang sesuai dengan kata kunci anda.<br>";
 		}
 		if(!empty($result['model']))
 		{
 			$flag = 1;
-			$kirim['submitted'] += "Kami menemukan ".sizeof($result['model'])." nama barang yang sesuai dengan kata kunci anda.<br>";
+			$kirim['submitted'] = $kirim['submitted']."Kami menemukan ".sizeof($result['model'])." model barang yang sesuai dengan kata kunci anda.<br>";
 		}
 
 		if($flag == 0)
@@ -127,17 +132,60 @@ class Form extends CI_Controller {
 		$kirim['jenis_barang'] = $this->Form_model->get_jenis_barang();
 		$kirim['location'] = $this->Form_model->get_location();
 		$kirim['selected_cari'] = 1;
+
 		$this->load->view('user/dashboard', $kirim);
 	}
 
-	public function submit_edit()
+	public function terima()
 	{
+		if(empty($_POST['kode']))
+			$this->index();
+		$result = $this->Form_model->get_device_Bycode($_POST['kode']);
+		if(empty($result))
+			$kirim['error'] = "Barang belum terdaftar.";
+		else
+		{
+			$data = array(
+				'dev_id' => $this->session->userdata('default_loc'),
+				'last_updated_date' => date('Y-m-d h:i:s'),
+				'last_updated_by' => $this->session->userdata('id_login'),
+				'status_in_out' => 0
+			);
+			$this->Form_model->update_barang($data, $result[0]->id);
+			$kirim['sukses'] = "Barang telah diterima";
+		}
 
+		$kirim['jenis_barang'] = $this->Form_model->get_jenis_barang();
+		$kirim['location'] = $this->Form_model->get_location();
+		$kirim['selected_terima'] = 1;
+
+		$this->load->view('user/dashboard', $kirim);
 	}
 
-	public function delete()
+	public function keluar()
 	{
+		if(empty($_POST['kode']))
+			$this->index();
+		$result = $this->Form_model->get_device_Bycode($_POST['kode']);
+		if(empty($result))
+			$kirim['error'] = "Barang belum terdaftar.";
+		else
+		{
+			$data = array(
+				'dev_id' => $this->session->userdata('default_loc'),
+				'last_updated_date' => date('Y-m-d h:i:s'),
+				'last_updated_by' => $this->session->userdata('id_login'),
+				'status_in_out' => 1
+			);
+			$this->Form_model->update_barang($data, $result[0]->id);
+			$kirim['sukses'] = "Barang telah dikeluarkan";
+		}
 
+		$kirim['jenis_barang'] = $this->Form_model->get_jenis_barang();
+		$kirim['location'] = $this->Form_model->get_location();
+		$kirim['selected_keluar'] = 1;
+
+		$this->load->view('user/dashboard', $kirim);
 	}
 
 	public function submit_delete()

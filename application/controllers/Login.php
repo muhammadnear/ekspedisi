@@ -36,6 +36,7 @@ class Login extends CI_Controller {
 					{
 						$this->session->set_userdata('id_login',$key->id_login);
 						$this->session->set_userdata('lastvisit_at',$key->lastvisit_at);
+						$this->session->set_userdata('default_loc',$key->ld_id);
 						$flag=2;
 						break;
 					}
@@ -79,4 +80,5 @@ class Login extends CI_Controller {
 		$kirim['selected_kode_baru'] = 1;
 		$this->load->view('user/dashboard', $kirim);
 	}
+
 }

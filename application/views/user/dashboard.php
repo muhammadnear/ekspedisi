@@ -104,7 +104,7 @@
 						<nav>
 							<ul class="cd-tabs-navigation">
 								<li><a data-content="new" <?php if(!empty($selected_kode_baru)) echo "class='selected'";?> href="#0">Buat Kode Baru</a></li>
-								<li><a data-content="store" <?php if(!empty($selected_masuk)) echo "class='selected'";?> href="#0">Barang Diterima</a></li>
+								<li><a data-content="store" <?php if(!empty($selected_terima)) echo "class='selected'";?> href="#0">Barang Diterima</a></li>
 								<li><a data-content="out" <?php if(!empty($selected_keluar)) echo "class='selected'";?> href="#0">Barang Keluar</a></li>
 								<li><a data-content="settings" <?php if(!empty($selected_cari)) echo "class='selected'";?> href="#0">Cari Barang</a></li>
 							</ul> <!-- cd-tabs-navigation -->
@@ -178,11 +178,11 @@
 								</form>
 							</li>
 
-							<li data-content="store" <?php if(!empty($selected_masuk)) echo "class='selected'";?>>
-								<form id="mc-form" action="<?php echo base_url()?>index.php/form/terima" method="post" class="group" novalidate="true" autocomplete="off">
+							<li data-content="store" <?php if(!empty($selected_terima)) echo "class='selected'";?>>
+								<form action="<?php echo base_url()?>index.php/form/terima" method="post" class="group" novalidate="true" autocomplete="off">
 					               	<div class="row">
 					               		<div class="col-eight tab-full left animate-this" data-animate="fadeInLeft">					
-							   				<input style="width: 100%;" type="text"  name="kode"  id="mce-EMAIL" placeholder="Masukkan Kode Barcode..." required="">
+							   				<input style="width: 100%;" type="text"  name="kode" placeholder="Masukkan Kode Barcode..." required="">
 							   			</div>
 
 								   		<div class="col-four tab-full right animate-this"  data-animate="fadeInLeft">
@@ -193,7 +193,7 @@
 							</li>
 
 							<li data-content="out" <?php if(!empty($selected_keluar)) echo "class='selected'";?>>
-								<form id="mc-form" action="<?php echo base_url()?>index.php/form/keluar" method="post" class="group" novalidate="true" autocomplete="off">
+								<form action="<?php echo base_url()?>index.php/form/keluar" method="post" class="group" novalidate="true" autocomplete="off">
 					               	<div class="row">
 					               		<div class="col-eight tab-full left animate-this" data-animate="fadeInRight">					
 							   				<input style="width: 100%;" type="text"  name="kode"  id="mce-EMAIL" placeholder="Masukkan Kode Barcode..." required="">
@@ -207,7 +207,7 @@
 							</li>
 
 							<li data-content="settings" <?php if(!empty($selected_cari)) echo "class='selected'";?>>
-								<form id="mc-form" class="group" action="<?php echo base_url()?>index.php/form/search" method="post" novalidate="true" autocomplete="off">
+								<form class="group" action="<?php echo base_url()?>index.php/form/search" method="post" novalidate="true" autocomplete="off">
 					               	<div class="row">
 					               		<div class="col-eight tab-full left animate-this" data-animate="fadeInLeft">					
 							   				<input style="width: 100%;" type="text" name="query" placeholder="Masukkan Kata Kunci..." required="">
@@ -218,7 +218,7 @@
 								   		</div>				   		
 				               		</div> <!-- /row -->										
 								</form>
-								<?php if(!empty($submitted)) echo "<div align='center' style='padding: 15px; background-color:#f2dede; margin-bottom: 15px;''>$submitted</div>"; ?>
+								<?php if(!empty($submitted)) echo "<div align='center' style='padding: 15px; background-color:#fcf8e3; margin-bottom: 15px;''>$submitted</div>"; ?>
 							</li>
 						</ul> <!-- cd-tabs-content -->
 					</div> <!-- cd-tabs -->
